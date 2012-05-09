@@ -6,7 +6,9 @@ A ZF2 module that allows the generation of Swagger compliant resource files and 
 Installation
 ------------
 
-git clone --recursive git://github.com/outeredge/SwaggerModule.git vendor/SwaggerModule
+1. git clone --recursive git://github.com/outeredge/SwaggerModule.git vendor/SwaggerModule
+2. Copy config/module.swagger_module.config.php.dist to your Application's config/autoload folder and modify path variable
+
 
 Usage
 -----
