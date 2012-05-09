@@ -1,0 +1,12 @@
+<?php
+return array(
+	'di' => array(
+		'instance'	=> array(
+			'SwaggerModule\Factory\Swagger' => array(
+				'parameters' => array(
+					'path' => __DIR__ . '/../../module/Application/src/Application/Controller',
+				),
+			),
+		),				
+	),
+);
