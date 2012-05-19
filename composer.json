@@ -1,0 +1,15 @@
+{
+    "name": "outeredge/SwaggerModule",
+	"type": "library",
+	"license": "Apache-2.0",
+	"homepage": "https://github.com/outeredge/SwaggerModule",
+	"description": "Zend Framework 2 Module for Swagger",
+	"keywords": [
+		"api",
+		"zf2"
+	],
+    "require": {
+		"php": ">=5.3.3",
+        "zircote/swagger-php": "dev-master"
+    }
+}

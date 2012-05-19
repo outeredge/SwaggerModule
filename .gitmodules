@@ -1,3 +1,0 @@
-[submodule "vendor/swagger-php"]
-	path = vendor/swagger-php
-	url = git://github.com/zircote/swagger-php.git
