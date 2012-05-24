@@ -1,9 +1,9 @@
 {
     "name": "outeredge/SwaggerModule",
+	"description": "Zend Framework 2 Module for Swagger",
 	"type": "library",
 	"license": "Apache-2.0",
-	"homepage": "https://github.com/outeredge/SwaggerModule",
-	"description": "Zend Framework 2 Module for Swagger",
+	"homepage": "https://github.com/outeredge/SwaggerModule",	
 	"keywords": [
 		"api",
 		"zf2"
@@ -11,5 +11,13 @@
     "require": {
 		"php": ">=5.3.3",
         "zircote/swagger-php": "dev-master"
-    }
+    },
+	"autoload": {
+		"psr-0": {
+			"SwaggerModule": "src/",
+		},
+		"classmap": [
+			"./"
+		]
+	},
 }
