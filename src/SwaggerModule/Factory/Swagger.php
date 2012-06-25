@@ -23,6 +23,8 @@ namespace SwaggerModule\Factory;
 use Swagger\Swagger as SwaggerLibrary;
 use Swagger\Resource;
 use Swagger\Models;
+use Zend\ServiceManager\FactoryInterface;
+use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\Code\Scanner\DirectoryScanner;
 use Zend\Code\Reflection\ClassReflection;
 
@@ -31,15 +33,15 @@ use Zend\Code\Reflection\ClassReflection;
  */
 class Swagger implements FactoryInterface
 {
-    
-	public function createService(ServiceLocatorInterface $serviceLocator)
+
+    public function createService(ServiceLocatorInterface $serviceLocator)
 	{
         $config = $serviceLocator->get('Configuration');
         
         if(!isset($config['swagger'])) {
             throw new \Exception('Configuration was not found');
         }
-        
+
         $paths = $config['swagger']['paths'];
 		if(count($paths) < 1) {
 			throw new \Exception('No path(s) were specified');
