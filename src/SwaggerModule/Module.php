@@ -20,21 +20,19 @@
 
 namespace SwaggerModule;
 
-use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
-
-class Module implements AutoloaderProviderInterface
+class Module
 {
-    public function getAutoloaderConfig()
+    
+    public function getServiceConfiguration()
     {
         return array(
-            'Zend\Loader\ClassMapAutoloader' => array(
-                __DIR__ . '/autoload_classmap.php',
+            'aliases' => array(
+                'service.swagger' => 'Swagger\Swagger',
             ),
+            'factories' => array(
+                'Swagger\Swagger' => 'SwaggerModule\Factory\Swagger'
+            )
         );
     }
     
-    public function getConfig()
-    {
-        return include __DIR__ . '/config/module.config.php';
-    }
 }

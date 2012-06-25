@@ -1,20 +1,41 @@
-SwaggerModule
-=============
+# SwaggerModule
 
 A ZF2 module that allows the generation of Swagger compliant resource files and is based on [swagger-php](https://github.com/zircote/swagger-php). 
 
-Installation
-------------
+## Requirements
+ - PHP 5.3 or higher
+ - [Zend Framework 2](http://www.github.com/zendframework/zf2)
 
-1. git clone --recursive git://github.com/outeredge/SwaggerModule.git vendor/SwaggerModule
-2. Copy config/module.swagger_module.config.php.dist to your Application's config/autoload folder and modify path variable
+## Installation
+Installation of SwaggerModule uses composer. For composer documentation, please refer to
+[getcomposer.org](http://getcomposer.org/).
 
+#### Installation steps
 
-Usage
------
+  1. `cd my/project/directory`
+  2. create a `composer.json` file with following contents:
+
+     ```json
+     {
+         "require": {
+             "outeredge/swagger-module": "dev-master"
+         }
+     }
+     ```
+  3. install composer via `curl -s http://getcomposer.org/installer | php` (on windows, download
+     http://getcomposer.org/installer and execute it with PHP)
+  4. run `php composer.phar install`
+  5. copy config/module.swagger.global.php.dist to your config/autoload folder and modify paths variable
+  6. open `my/project/directory/configs/application.config.php` and add the following key to your `modules`:
+
+     ```php
+     'SwaggerModule',
+     ```
+
+## Usage
 See [swagger-php](https://github.com/zircote/swagger-php#readme) for library usage information.
 
 ```php
-$swagger = $this->getLocator()->get('Swagger\Swagger');
+$swagger = $this->getServiceLocator()->get('service.swagger');
 echo $swagger->getResource('http://org.local/v1');
 ```

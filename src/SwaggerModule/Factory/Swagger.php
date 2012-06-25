@@ -20,32 +20,40 @@
 
 namespace SwaggerModule\Factory;
 
-use Swagger\Swagger as SwaggerLibrary,	
-	Swagger\Resource,
-	Swagger\Models,
-	Zend\Code\Scanner\DirectoryScanner,
-	Zend\Code\Reflection\ClassReflection;
+use Swagger\Swagger as SwaggerLibrary;
+use Swagger\Resource;
+use Swagger\Models;
+use Zend\Code\Scanner\DirectoryScanner;
+use Zend\Code\Reflection\ClassReflection;
 
 /**
  * SwaggerModule factory.
  */
-class Swagger
+class Swagger implements FactoryInterface
 {
-	public static function get($path)
+    
+	public function createService(ServiceLocatorInterface $serviceLocator)
 	{
-		if(!$path) {
-			throw new \Exception('No path was specified');
+        $config = $serviceLocator->get('Configuration');
+        
+        if(!isset($config['swagger'])) {
+            throw new \Exception('Configuration was not found');
+        }
+        
+        $paths = $config['swagger']['paths'];
+		if(count($paths) < 1) {
+			throw new \Exception('No path(s) were specified');
 		}
 
-		$scanner = new DirectoryScanner($path);
-		$classList = array();		
+		$scanner = new DirectoryScanner($paths);
+		$classList = array();
 		foreach ($scanner->getClassNames() as $class) {
 			$classReflection = new ClassReflection($class);
 			array_push($classList, $classReflection);
 		}		
 		
 		if(empty($classList)) {
-			throw new \Exception('No classes found in specified path');
+			throw new \Exception('No classes found in specified path(s)');
 		}
 
 		$sw = new SwaggerLibrary();
