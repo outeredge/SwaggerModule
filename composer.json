@@ -14,10 +14,10 @@
     },
 	"autoload": {
 		"psr-0": {
-			"SwaggerModule": "src/",
-		},
+			"SwaggerModule": "src/"
+        },
 		"classmap": [
 			"./"
 		]
-	},
+	}
 }
