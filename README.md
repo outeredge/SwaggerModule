@@ -18,7 +18,7 @@ Installation of SwaggerModule uses composer. For composer documentation, please 
      ```json
      {
          "require": {
-             "outeredge/swagger-module": "dev-master"
+             "outeredge/SwaggerModule": "dev-master"
          }
      }
      ```
