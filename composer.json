@@ -1,5 +1,5 @@
 {
-    "name": "outeredge/SwaggerModule",
+    "name": "outeredge/swagger-module",
 	"description": "Zend Framework 2 Module for Swagger resource file generation",
 	"type": "library",
 	"license": "Apache-2.0",
