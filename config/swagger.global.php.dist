@@ -1,0 +1,28 @@
+<?php
+
+return array(
+    'swagger' => array(
+        /**
+         * List a path or paths containing Swagger Annotated classes
+         */
+        'paths' => array(
+            __DIR__ . '/../../module/Application/src/Application/Controller',
+        ),
+
+        /**
+         * The path where the generated file is stored (default to the /docs folder)
+         */
+        // 'output_path' => getcwd() . '/docs',
+
+        /**
+         * The output filename. Please do not add any extension, just the name
+         */
+        // 'output_filename' => 'api',
+
+        /**
+         * The path to the CSS file that is used. By default, the CSS uses a modified version of
+         * Swagger UI, because it's simply super beautiful
+         */
+        // 'css_path' => 'path/to/your/file.css
+    )
+);

@@ -1,6 +1,6 @@
 # SwaggerModule
 
-A ZF2 module that allows the generation of Swagger compliant resource files and is based on [swagger-php](https://github.com/zircote/swagger-php). 
+A Zend Framework 2 module that allows the generation of Swagger compliant resource files and is based on [swagger-php](https://github.com/zircote/swagger-php).
 
 ## Requirements
  - PHP 5.3 or higher
@@ -18,7 +18,7 @@ Installation of SwaggerModule uses composer. For composer documentation, please 
      ```json
      {
          "require": {
-             "outeredge/SwaggerModule": "dev-master"
+             "outeredge/swagger-module": "dev-master"
          }
      }
      ```

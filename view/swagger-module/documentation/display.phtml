@@ -1,0 +1,18 @@
+<?php $this->headLink()->appendStylesheet($this->basePath() . '/css/swagger-ui.css'); ?>
+
+<div class="row">
+    <ul id="resources" class="span12">
+        <?php foreach($this->resources as $resource): ?>
+            <?= $this->render('swagger-module/documentation/resource', array('resource' => $resource)); ?>
+        <?php endforeach; ?>
+    </ul>
+
+    <div class="api-details">
+        <h4>
+            <?php $base = current($this->vars('resources')); ?>
+            
+            <span>base url: <?= $base['basePath']; ?></span>
+            <span>api version: <?= $base['apiVersion']; ?></span>
+        </h4>
+    </div>
+</div>
