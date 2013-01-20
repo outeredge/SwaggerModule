@@ -21,7 +21,7 @@
 namespace SwaggerModule\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
-use Zend\View\Model\ViewModel;
+use Zend\View\Model\JsonModel;
 
 /**
  * DocumentationController. It is used to display a documentation in HTML
@@ -31,7 +31,7 @@ class DocumentationController extends AbstractActionController
     /**
      * Display the documentation
      *
-     * @return string
+     * @return JsonModel
      */
     public function displayAction()
     {
@@ -39,8 +39,34 @@ class DocumentationController extends AbstractActionController
         $swagger = $this->serviceLocator->get('Swagger\Swagger');
         $swagger->flushCache();
 
-        return new ViewModel(array(
-            'resources' => $swagger->getRegistry()
-        ));
+        $jsonModel = new JsonModel();
+
+        // This is kind of sad that we need to deserialize to serialize again, but this is how
+        // Swagger-PHP is thought by always serialize data
+        return $jsonModel->setVariables(json_decode($swagger->getResourceList(), true));
+    }
+
+    /**
+     * Get the details of a resource
+     *
+     * @return JsonModel
+     */
+    public function detailsAction()
+    {
+        /** @var $swagger \Swagger\Swagger */
+        $swagger = $this->serviceLocator->get('Swagger\Swagger');
+        $swagger->flushCache();
+
+        $resource = $swagger->getResource('/' . $this->params('resource', null));
+
+        if ($resource === false) {
+            return new JsonModel();
+        }
+
+        $jsonModel = new JsonModel();
+
+        // This is kind of sad that we need to deserialize to serialize again, but this is how
+        // Swagger-PHP is thought by always serialize data
+        return $jsonModel->setVariables(json_decode($resource, true));
     }
 }

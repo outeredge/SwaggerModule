@@ -35,13 +35,6 @@ class ModuleOptions extends AbstractOptions
      */
     protected $paths;
 
-    /**
-     * Path to the CSS file to use to render the HTML documentation
-     *
-     * @var string
-     */
-    protected $cssPath;
-
 
     /**
      * Set an array of paths where the files to be scanned by Swagger are searched
