@@ -25,18 +25,12 @@ use Swagger\Swagger as SwaggerLibrary;
 use SwaggerModule\Options\ModuleOptions as SwaggerModuleOptions;
 use Zend\Console\Adapter\AdapterInterface;
 use Zend\ModuleManager\Feature\ConfigProviderInterface;
-use Zend\ModuleManager\Feature\ConsoleBannerProviderInterface;
-use Zend\ModuleManager\Feature\ConsoleUsageProviderInterface;
 use Zend\ModuleManager\Feature\ServiceProviderInterface;
 
 /**
  * SwaggerModule
  */
-class Module implements
-    ConfigProviderInterface,
-    ConsoleBannerProviderInterface,
-    ConsoleUsageProviderInterface,
-    ServiceProviderInterface
+class Module implements ConfigProviderInterface, ServiceProviderInterface
 {
     /**
      * {@inheritDoc}
@@ -44,31 +38,6 @@ class Module implements
     public function getConfig()
     {
         return include __DIR__ . '/../../config/module.config.php';
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getConsoleBanner(AdapterInterface $console)
-    {
-        $banner = '----------------------------------------------------------------------' . PHP_EOL .
-                  'SwaggerModule | Swagger Zend Framework 2 module' . PHP_EOL .
-                  '----------------------------------------------------------------------' . PHP_EOL;
-
-        return $banner;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getConsoleUsage(AdapterInterface $console)
-    {
-        return array(
-            'swagger generate [html|json] [--outputPath=]' => 'Generate the HTML file',
-
-            array('[json|html]', 'Output format (default to html)'),
-            array('--outputPath=', 'Output path (default to project_path/docs/api.html)')
-        );
     }
 
     /**
