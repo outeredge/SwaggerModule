@@ -6,9 +6,9 @@
 	"homepage": "https://github.com/outeredge/SwaggerModule",	
 	"keywords": [
 		"api",
-        "rest",
+        	"rest",
 		"zf2",
-        "swagger"
+        	"swagger"
 	],
     "require": {
 		"php": ">=5.3.3",
