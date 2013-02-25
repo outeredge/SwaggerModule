@@ -41,9 +41,7 @@ class DocumentationController extends AbstractActionController
 
         $jsonModel = new JsonModel();
 
-        // This is kind of sad that we need to deserialize to serialize again, but this is how
-        // Swagger-PHP is thought by always serialize data
-        return $jsonModel->setVariables(json_decode($swagger->getResourceList(), true));
+        return $jsonModel->setVariables($swagger->getResourceList(true, false));
     }
 
     /**
@@ -57,7 +55,7 @@ class DocumentationController extends AbstractActionController
         $swagger = $this->serviceLocator->get('Swagger\Swagger');
         $swagger->flushCache();
 
-        $resource = $swagger->getResource('/' . $this->params('resource', null));
+        $resource = $swagger->getResource('/' . $this->params('resource', null), true, false);
 
         if ($resource === false) {
             return new JsonModel();
@@ -65,8 +63,6 @@ class DocumentationController extends AbstractActionController
 
         $jsonModel = new JsonModel();
 
-        // This is kind of sad that we need to deserialize to serialize again, but this is how
-        // Swagger-PHP is thought by always serialize data
-        return $jsonModel->setVariables(json_decode($resource, true));
+        return $jsonModel->setVariables($resource);
     }
 }
