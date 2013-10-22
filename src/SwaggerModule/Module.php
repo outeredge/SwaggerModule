@@ -65,11 +65,7 @@ class Module implements ConfigProviderInterface, ServiceProviderInterface
                 'Swagger\Swagger' => function($serviceManager) {
                     /** @var $options \SwaggerModule\Options\ModuleOptions */
                     $options = $serviceManager->get('SwaggerModule\Options\ModuleOptions');
-
-                    $swagger = new SwaggerLibrary();
-                    $swagger->setFileList($options->getFileList());
-
-                    return $swagger;
+                    return new SwaggerLibrary($options->getPaths());
                 },
             )
         );
