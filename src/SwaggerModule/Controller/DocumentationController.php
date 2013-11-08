@@ -37,11 +37,8 @@ class DocumentationController extends AbstractActionController
     {
         /** @var $swagger \Swagger\Swagger */
         $swagger = $this->serviceLocator->get('Swagger\Swagger');
-        $swagger->flushCache();
-
         $jsonModel = new JsonModel();
-
-        return $jsonModel->setVariables($swagger->getResourceList(true, false));
+        return $jsonModel->setVariables($swagger->getResourceList());
     }
 
     /**
@@ -53,9 +50,7 @@ class DocumentationController extends AbstractActionController
     {
         /** @var $swagger \Swagger\Swagger */
         $swagger = $this->serviceLocator->get('Swagger\Swagger');
-        $swagger->flushCache();
-
-        $resource = $swagger->getResource('/' . $this->params('resource', null), true, false);
+        $resource = $swagger->getResource('/' . $this->params('resource', null));
 
         if ($resource === false) {
             return new JsonModel();
