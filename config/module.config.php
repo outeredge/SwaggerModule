@@ -32,10 +32,10 @@ return array(
             'SwaggerModule\Controller\Documentation' => 'SwaggerModule\Controller\DocumentationController'
         )
     ),
-	
-	'view_manager' => array( 
-        'strategies' => array( 
-            'ViewJsonStrategy' 
-        ), 
+
+    'view_manager' => array(
+        'strategies' => array(
+            'ViewJsonStrategy'
+        ),
     ),
 );
