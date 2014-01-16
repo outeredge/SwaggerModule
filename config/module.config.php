@@ -31,5 +31,11 @@ return array(
         'invokables' => array(
             'SwaggerModule\Controller\Documentation' => 'SwaggerModule\Controller\DocumentationController'
         )
-    )
+    ),
+
+    'view_manager' => array(
+        'strategies' => array(
+            'ViewJsonStrategy'
+        ),
+    ),
 );
