@@ -50,7 +50,11 @@ class DocumentationController extends AbstractActionController
     {
         /** @var $swagger \Swagger\Swagger */
         $swagger = $this->serviceLocator->get('Swagger\Swagger');
-        $resource = $swagger->getResource('/' . $this->params('resource', null));
+
+        /** @var $options \SwaggerModule\Options\ModuleOptions */
+        $options = $this->serviceLocator->get('SwaggerModule\Options\ModuleOptions');
+        $resourceOptions = $options->getResourceOptions() ? : array();
+        $resource = $swagger->getResource('/' . $this->params('resource', null), $resourceOptions);
 
         if ($resource === false) {
             return new JsonModel();
