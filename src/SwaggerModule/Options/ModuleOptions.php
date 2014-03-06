@@ -35,6 +35,12 @@ class ModuleOptions extends AbstractOptions
      */
     protected $paths;
 
+    /**
+     * Key - Value array for resource details 
+     *
+     * @var array 
+     */
+    protected $resourceOptions;
 
     /**
      * Set an array of paths where the files to be scanned by Swagger are searched
@@ -94,5 +100,23 @@ class ModuleOptions extends AbstractOptions
         }
 
         return $fileList;
+    }
+
+    /**
+     *
+     * @return array
+     */
+    public function getResourceOptions()
+    {
+        return $this->resourceOptions;
+    }
+
+    /**
+     *
+     * @param array $resourceOptions
+     */
+    public function setResourceOptions($resourceOptions)
+    {
+        $this->resourceOptions = $resourceOptions;
     }
 }
