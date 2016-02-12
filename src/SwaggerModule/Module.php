@@ -21,7 +21,7 @@
 namespace SwaggerModule;
 
 use RuntimeException;
-use Swagger\Swagger as SwaggerLibrary;
+use Swagger\Annotations\Swagger as SwaggerLibrary;
 use SwaggerModule\Options\ModuleOptions as SwaggerModuleOptions;
 use Zend\Console\Adapter\AdapterInterface;
 use Zend\ModuleManager\Feature\ConfigProviderInterface;
@@ -62,10 +62,26 @@ class Module implements ConfigProviderInterface, ServiceProviderInterface
                     return new SwaggerModuleOptions($config);
                 },
 
-                'Swagger\Swagger' => function($serviceManager) {
+                'Swagger\Annotations\Swagger' => function($serviceManager) {
                     /** @var $options \SwaggerModule\Options\ModuleOptions */
                     $options = $serviceManager->get('SwaggerModule\Options\ModuleOptions');
-                    return new SwaggerLibrary($options->getPaths());
+                    $analyser = new \Swagger\StaticAnalyser();
+                    $analysis = new \Swagger\Analysis();
+                    $processors = \Swagger\Analysis::processors();
+
+                    // Crawl directory and parse all files
+                    $paths = $options->getPaths();
+                    foreach($paths as $directory) {
+                        $finder = \Swagger\Util::finder($directory);
+                        foreach ($finder as $file) {
+                            $analysis->addAnalysis($analyser->fromFile($file->getPathname()));
+                        }
+                    }
+                    // Post processing
+                    $analysis->process($processors);
+                    // Validation (Generate notices & warnings)
+                    $analysis->validate();
+                    return $analysis->swagger;
                 },
             )
         );

@@ -35,10 +35,10 @@ class DocumentationController extends AbstractActionController
      */
     public function displayAction()
     {
-        /** @var $swagger \Swagger\Swagger */
-        $swagger = $this->serviceLocator->get('Swagger\Swagger');
-        $jsonModel = new JsonModel();
-        return $jsonModel->setVariables($swagger->getResourceList());
+        /** @var $swagger \Swagger\Annotations\Swagger */
+        $swagger = $this->serviceLocator->get('Swagger\Annotations\Swagger');
+        $jsonModel = new JsonModel((array)$swagger->jsonSerialize());
+        return $jsonModel;
     }
 
     /**
@@ -49,7 +49,7 @@ class DocumentationController extends AbstractActionController
     public function detailsAction()
     {
         /** @var $swagger \Swagger\Swagger */
-        $swagger = $this->serviceLocator->get('Swagger\Swagger');
+        $swagger = $this->serviceLocator->get('Swagger\Annotations\Swagger');
 
         /** @var $options \SwaggerModule\Options\ModuleOptions */
         $options = $this->serviceLocator->get('SwaggerModule\Options\ModuleOptions');
