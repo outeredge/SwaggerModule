@@ -21,7 +21,6 @@
 namespace SwaggerModule;
 
 use RuntimeException;
-use Swagger\Annotations\Swagger as SwaggerLibrary;
 use SwaggerModule\Options\ModuleOptions as SwaggerModuleOptions;
 use Swagger\StaticAnalyser as SwaggerStaticAnalyser;
 use Swagger\Analysis as SwaggerAnalysis;
