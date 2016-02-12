@@ -23,6 +23,9 @@ namespace SwaggerModule;
 use RuntimeException;
 use Swagger\Annotations\Swagger as SwaggerLibrary;
 use SwaggerModule\Options\ModuleOptions as SwaggerModuleOptions;
+use Swagger\StaticAnalyser as SwaggerStaticAnalyser;
+use Swagger\Analysis as SwaggerAnalysis;
+use Swagger\Util as SwaggerUtil;
 use Zend\Console\Adapter\AdapterInterface;
 use Zend\ModuleManager\Feature\ConfigProviderInterface;
 use Zend\ModuleManager\Feature\ServiceProviderInterface;
@@ -47,7 +50,7 @@ class Module implements ConfigProviderInterface, ServiceProviderInterface
     {
         return array(
             'aliases' => array(
-                'service.swagger' => 'Swagger\Swagger',
+                'service.swagger' => 'Swagger\Annotations\Swagger',
             ),
 
             'factories' => array(
@@ -65,14 +68,14 @@ class Module implements ConfigProviderInterface, ServiceProviderInterface
                 'Swagger\Annotations\Swagger' => function($serviceManager) {
                     /** @var $options \SwaggerModule\Options\ModuleOptions */
                     $options = $serviceManager->get('SwaggerModule\Options\ModuleOptions');
-                    $analyser = new \Swagger\StaticAnalyser();
-                    $analysis = new \Swagger\Analysis();
-                    $processors = \Swagger\Analysis::processors();
+                    $analyser = new SwaggerStaticAnalyser();
+                    $analysis = new SwaggerAnalysis();
+                    $processors = SwaggerAnalysis::processors();
 
                     // Crawl directory and parse all files
                     $paths = $options->getPaths();
                     foreach($paths as $directory) {
-                        $finder = \Swagger\Util::finder($directory);
+                        $finder = SwaggerUtil::finder($directory);
                         foreach ($finder as $file) {
                             $analysis->addAnalysis($analyser->fromFile($file->getPathname()));
                         }
