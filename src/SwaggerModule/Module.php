@@ -83,6 +83,19 @@ class Module implements ConfigProviderInterface, ServiceProviderInterface
                     $analysis->process($processors);
                     // Validation (Generate notices & warnings)
                     $analysis->validate();
+
+                    // Pass options to analyzer
+                    $resourceOptions = $options->getResourceOptions();
+                    if(!empty($resourceOptions['defaultBasePath'])) {
+                        $analysis->swagger->basePath = $resourceOptions['defaultBasePath'];
+                    }
+                    if(!empty($resourceOptions['defaultHost'])) {
+                        $analysis->swagger->host = $resourceOptions['defaultHost'];
+                    }
+                    if(!empty($resourceOptions['schemes'])) {
+                        $analysis->swagger->schemes = $resourceOptions['schemes'];
+                    }
+
                     return $analysis->swagger;
                 },
             )
