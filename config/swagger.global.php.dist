@@ -12,9 +12,10 @@ return array(
         'resource_options' => array(
             'output' => 'array',
             'json_pretty_print' => true, // for outputtype 'json'
-            'defaultBasePath' => null,
             'defaultApiVersion' => null,
-            'defaultSwaggerVersion' => '1.2',
+            'defaultBasePath' => null, // e.g. /api
+            'defaultHost' => null, // example.com
+            'schemes' => null, // e.g. ['http', 'https'],
         ),
     )
 );
