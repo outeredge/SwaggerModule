@@ -28,9 +28,14 @@ return array(
     ),
 
     'controllers' => array(
-        'invokables' => array(
-            'SwaggerModule\Controller\Documentation' => 'SwaggerModule\Controller\DocumentationController'
-        )
+        'factories' => array(
+            'SwaggerModule\Controller\Documentation' => function(\Zend\ServiceManager\ServiceManager $serviceManager) {
+                $controller = new SwaggerModule\Controller\DocumentationController();
+                $swagger = $serviceManager->get('Swagger\Annotations\Swagger');
+                $controller->setSwagger($swagger);
+                return $controller;
+            }
+        ),
     ),
 
     'view_manager' => array(
