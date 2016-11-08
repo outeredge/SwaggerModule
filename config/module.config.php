@@ -29,12 +29,7 @@ return array(
 
     'controllers' => array(
         'factories' => array(
-            'SwaggerModule\Controller\Documentation' => function(\Zend\ServiceManager\ServiceManager $serviceManager) {
-                $controller = new SwaggerModule\Controller\DocumentationController();
-                $swagger = $serviceManager->get('Swagger\Annotations\Swagger');
-                $controller->setSwagger($swagger);
-                return $controller;
-            }
+            'SwaggerModule\Controller\Documentation' => 'SwaggerModule\Controller\DocumentationControllerFactory',
         ),
     ),
 
