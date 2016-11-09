@@ -1,36 +1,30 @@
 # SwaggerModule
 
-A Zend Framework 2 module that allows the generation of Swagger compliant resource files and is based on [swagger-php](https://github.com/zircote/swagger-php).
-
-## Requirements
- - PHP 5.3 or higher
- - [Zend Framework 2](http://www.github.com/zendframework/zf2)
+A Zend Framework module that allows the generation of Swagger compliant resource files and is based on [swagger-php](https://github.com/zircote/swagger-php).
 
 ## Installation
-Installation of SwaggerModule uses composer. For composer documentation, please refer to
-[getcomposer.org](http://getcomposer.org/).
+The recommended way to install
+[`outeredge/swagger-module`](https://packagist.org/packages/outeredge/swagger-module) is through
+[composer](http://getcomposer.org/):
 
-#### Installation steps
+```sh
+php composer.phar require outeredge/swagger-module
+```
 
-  1. `cd my/project/directory`
-  2. create a `composer.json` file with following contents:
+You can then enable this module in your `config/application.config.php` by adding
+`SwaggerModule` to the `modules` key:
 
-     ```json
-     {
-         "require": {
-             "outeredge/swagger-module": "dev-master"
-         }
-     }
-     ```
-  3. install composer via `curl -s http://getcomposer.org/installer | php` (on windows, download
-     http://getcomposer.org/installer and execute it with PHP)
-  4. run `php composer.phar install`
-  5. copy config/module.swagger.global.php.dist to your config/autoload folder and modify paths variable
-  6. open `my/project/directory/configs/application.config.php` and add the following key to your `modules`:
+```php
+// ...
+    'modules' => array(
+        // ...
+        'SwaggerModule'
+    ),
+```
 
-     ```php
-     'SwaggerModule',
-     ```
+## Configuration
+
+Copy `config/module.swagger.global.php.dist` to your config/autoload folder and modify paths variable
 
 ## Usage
 See [swagger-php](https://github.com/zircote/swagger-php#readme) for library usage information.
