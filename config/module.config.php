@@ -28,9 +28,9 @@ return array(
     ),
 
     'controllers' => array(
-        'invokables' => array(
-            'SwaggerModule\Controller\Documentation' => 'SwaggerModule\Controller\DocumentationController'
-        )
+        'factories' => array(
+            'SwaggerModule\Controller\Documentation' => 'SwaggerModule\Controller\DocumentationControllerFactory',
+        ),
     ),
 
     'view_manager' => array(

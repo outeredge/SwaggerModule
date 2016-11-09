@@ -20,6 +20,7 @@
 
 namespace SwaggerModule\Controller;
 
+use Swagger\Annotations\Swagger;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\JsonModel;
 
@@ -28,6 +29,12 @@ use Zend\View\Model\JsonModel;
  */
 class DocumentationController extends AbstractActionController
 {
+    protected $swagger;
+
+    public function setSwagger(Swagger $swagger) {
+        $this->swagger = $swagger;
+    }
+
     /**
      * Display the documentation
      *
@@ -35,9 +42,7 @@ class DocumentationController extends AbstractActionController
      */
     public function displayAction()
     {
-        /** @var $swagger \Swagger\Annotations\Swagger */
-        $swagger = $this->serviceLocator->get('Swagger\Annotations\Swagger');
-        $jsonModel = new JsonModel((array)$swagger->jsonSerialize());
+        $jsonModel = new JsonModel((array)$this->swagger->jsonSerialize());
         return $jsonModel;
     }
 
@@ -48,13 +53,10 @@ class DocumentationController extends AbstractActionController
      */
     public function detailsAction()
     {
-        /** @var $swagger \Swagger\Swagger */
-        $swagger = $this->serviceLocator->get('Swagger\Annotations\Swagger');
-
         /** @var $options \SwaggerModule\Options\ModuleOptions */
         $options = $this->serviceLocator->get('SwaggerModule\Options\ModuleOptions');
         $resourceOptions = $options->getResourceOptions() ? : array();
-        $resource = $swagger->getResource('/' . $this->params('resource', null), $resourceOptions);
+        $resource = $this->swagger->getResource('/' . $this->params('resource', null), $resourceOptions);
 
         if ($resource === false) {
             return new JsonModel();
