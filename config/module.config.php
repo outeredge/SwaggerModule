@@ -29,7 +29,7 @@ return array(
 
     'controllers' => array(
         'factories' => array(
-            'SwaggerModule\Controller\Documentation' => 'SwaggerModule\Controller\DocumentationControllerFactory',
+            'SwaggerModule\Controller\Documentation' => 'SwaggerModule\Controller\DocumentationControllerZf2ShimFactory',
         ),
     ),
 
