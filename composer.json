@@ -3,11 +3,12 @@
     "description": "Zend Framework Module for Swagger resource file generation",
     "type": "library",
     "license": "Apache-2.0",
-    "homepage": "https://github.com/outeredge/SwaggerModule",	
+    "homepage": "https://github.com/outeredge/SwaggerModule",
     "keywords": [
         "api",
         "rest",
         "zf2",
+        "zf3",
         "swagger"
     ],
     "require": {

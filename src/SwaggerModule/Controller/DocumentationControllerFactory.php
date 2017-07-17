@@ -14,20 +14,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @copyright  Copyright (c) 2012 OuterEdge UK Ltd (http://www.outeredgeuk.com)
+ * @copyright  Copyright (c) 2017 OuterEdge UK Ltd (https://outeredgeuk.com)
  * @license http://www.apache.org/licenses/LICENSE-2.0
  */
 
 namespace SwaggerModule\Controller;
 
-use Zend\ServiceManager\Factory\FactoryInterface;
 use Interop\Container\ContainerInterface;
+use Zend\ServiceManager\AbstractFactoryInterface;
+use Zend\ServiceManager\ServiceLocatorInterface;
 
-/**
- * DocumentationController factory
- */
-class DocumentationControllerFactory implements FactoryInterface
+class DocumentationControllerFactory implements AbstractFactoryInterface
 {
+    public function canCreate(ContainerInterface $container, $requestedName)
+    {
+        return class_exists($requestedName);
+    }
+
+    public function canCreateServiceWithName(ServiceLocatorInterface $services, $name, $requestedName)
+    {
+        return $this->canCreate($services, $requestedName);
+    }
+
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
         $controller = new DocumentationController();
@@ -35,5 +43,10 @@ class DocumentationControllerFactory implements FactoryInterface
         $swagger = $container->get('Swagger\Annotations\Swagger');
         $controller->setSwagger($swagger);
         return $controller;
+    }
+
+    public function createServiceWithName(ServiceLocatorInterface $services, $name, $requestedName)
+    {
+        return $this($services, $requestedName);
     }
 }
