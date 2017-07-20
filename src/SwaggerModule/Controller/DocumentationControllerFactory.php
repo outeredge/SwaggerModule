@@ -20,33 +20,22 @@
 
 namespace SwaggerModule\Controller;
 
-use Interop\Container\ContainerInterface;
-use Zend\ServiceManager\AbstractFactoryInterface;
+use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
-class DocumentationControllerFactory implements AbstractFactoryInterface
+class DocumentationControllerFactory implements FactoryInterface
 {
-    public function canCreate(ContainerInterface $container, $requestedName)
+    public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        return class_exists($requestedName);
-    }
+        /** @var $realServiceLocator ServiceLocatorInterface */
+        $realServiceLocator = $serviceLocator->getServiceLocator();
 
-    public function canCreateServiceWithName(ServiceLocatorInterface $services, $name, $requestedName)
-    {
-        return $this->canCreate($services, $requestedName);
-    }
-
-    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
-    {
         $controller = new DocumentationController();
-        /** @var \Swagger\Annotations\Swagger */
-        $swagger = $container->get('Swagger\Annotations\Swagger');
-        $controller->setSwagger($swagger);
-        return $controller;
-    }
 
-    public function createServiceWithName(ServiceLocatorInterface $services, $name, $requestedName)
-    {
-        return $this($services, $requestedName);
+        /** @var $swagger \Swagger\Annotations\Swagger */
+        $swagger = $realServiceLocator->get('Swagger\Annotations\Swagger');
+        $controller->setSwagger($swagger);
+
+        return $controller;
     }
 }
