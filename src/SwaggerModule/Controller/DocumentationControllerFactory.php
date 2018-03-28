@@ -36,11 +36,11 @@ class DocumentationControllerFactory implements AbstractFactoryInterface
         return $this->canCreate($services, $requestedName);
     }
 
-    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
+    public function __invoke(ContainerInterface $container, $requestedName)
     {
         $controller = new DocumentationController();
         /** @var \Swagger\Annotations\Swagger */
-        $swagger = $container->get('Swagger\Annotations\Swagger');
+        $swagger = $container->getServiceLocator()->get('Swagger\Annotations\Swagger');
         $controller->setSwagger($swagger);
         return $controller;
     }
