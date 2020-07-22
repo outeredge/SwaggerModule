@@ -21,7 +21,9 @@
 namespace SwaggerModule\Controller;
 
 use Interop\Container\ContainerInterface;
+use Swagger\Annotations\Swagger;
 use Zend\ServiceManager\AbstractFactoryInterface;
+use Zend\ServiceManager\AbstractPluginManager;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
 class DocumentationControllerFactory implements AbstractFactoryInterface
@@ -36,17 +38,20 @@ class DocumentationControllerFactory implements AbstractFactoryInterface
         return $this->canCreate($services, $requestedName);
     }
 
-    public function __invoke(ContainerInterface $container, $requestedName)
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
         $controller = new DocumentationController();
-        /** @var \Swagger\Annotations\Swagger */
-        $swagger = $container->getServiceLocator()->get('Swagger\Annotations\Swagger');
+        /** @var Swagger $swagger */
+        $swagger = $container->get('Swagger\Annotations\Swagger');
         $controller->setSwagger($swagger);
         return $controller;
     }
 
     public function createServiceWithName(ServiceLocatorInterface $services, $name, $requestedName)
     {
+        if ($services instanceof AbstractPluginManager) {
+            $services = $services->getServiceLocator();
+        }
         return $this($services, $requestedName);
     }
 }
