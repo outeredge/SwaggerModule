@@ -19,10 +19,6 @@ return array(
                     'description' => null, // e.g. "Production server (uses live data)"
                 ],
             ],
-            // deprecated
-            'defaultBasePath' => null, // e.g. /api
-            'defaultHost' => null, // example.com
-            'schemes' => null, // e.g. ['http', 'https'],
         ),
     )
 );
