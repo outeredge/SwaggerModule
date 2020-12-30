@@ -21,7 +21,7 @@
 namespace SwaggerModule\Controller;
 
 use Interop\Container\ContainerInterface;
-use Swagger\Annotations\Swagger;
+use OpenApi\Annotations\OpenApi;
 use Laminas\ServiceManager\AbstractFactoryInterface;
 use Laminas\ServiceManager\AbstractPluginManager;
 use Laminas\ServiceManager\ServiceLocatorInterface;
@@ -41,9 +41,9 @@ class DocumentationControllerFactory implements AbstractFactoryInterface
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
         $controller = new DocumentationController();
-        /** @var Swagger $swagger */
-        $swagger = $container->get('Swagger\Annotations\Swagger');
-        $controller->setSwagger($swagger);
+        /** @var OpenApi $openApi */
+        $openApi = $container->get('OpenApi\Annotations\OpenApi');
+        $controller->setOpenApi($openApi);
         return $controller;
     }
 

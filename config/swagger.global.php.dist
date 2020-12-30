@@ -13,6 +13,14 @@ return array(
             'output' => 'array',
             'json_pretty_print' => true, // for outputtype 'json'
             'defaultApiVersion' => null,
+            'servers' => [
+                [
+                    'basePath' => '/api/v1', // /, /api, /api/v1 etc
+                    'host' => 'example.com', // API host/domain
+                    'schemes' => ['https'],  // e.g. ['http', 'https'],
+                ],
+            ],
+            // deprecated
             'defaultBasePath' => null, // e.g. /api
             'defaultHost' => null, // example.com
             'schemes' => null, // e.g. ['http', 'https'],
