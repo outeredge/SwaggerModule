@@ -25,9 +25,9 @@ use SwaggerModule\Options\ModuleOptions as SwaggerModuleOptions;
 use Swagger\StaticAnalyser as SwaggerStaticAnalyser;
 use Swagger\Analysis as SwaggerAnalysis;
 use Swagger\Util as SwaggerUtil;
-use Zend\Console\Adapter\AdapterInterface;
-use Zend\ModuleManager\Feature\ConfigProviderInterface;
-use Zend\ModuleManager\Feature\ServiceProviderInterface;
+use Laminas\Console\Adapter\AdapterInterface;
+use Laminas\ModuleManager\Feature\ConfigProviderInterface;
+use Laminas\ModuleManager\Feature\ServiceProviderInterface;
 
 /**
  * SwaggerModule

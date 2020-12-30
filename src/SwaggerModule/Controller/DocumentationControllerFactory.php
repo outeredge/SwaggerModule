@@ -22,9 +22,9 @@ namespace SwaggerModule\Controller;
 
 use Interop\Container\ContainerInterface;
 use Swagger\Annotations\Swagger;
-use Zend\ServiceManager\AbstractFactoryInterface;
-use Zend\ServiceManager\AbstractPluginManager;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Laminas\ServiceManager\AbstractFactoryInterface;
+use Laminas\ServiceManager\AbstractPluginManager;
+use Laminas\ServiceManager\ServiceLocatorInterface;
 
 class DocumentationControllerFactory implements AbstractFactoryInterface
 {

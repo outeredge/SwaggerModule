@@ -21,7 +21,7 @@
 namespace SwaggerModule\Options;
 
 use DirectoryIterator;
-use Zend\Stdlib\AbstractOptions;
+use Laminas\Stdlib\AbstractOptions;
 
 /**
  * ModuleOptions
