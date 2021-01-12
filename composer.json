@@ -1,9 +1,9 @@
 {
-    "name": "codeit/swagger-module",
+    "name": "outeredge/swagger-module",
     "description": "Laminas Framework Module for Swagger resource file generation",
     "type": "library",
     "license": "Apache-2.0",
-    "homepage": "https://github.com/xl32/SwaggerModule",
+    "homepage": "https://github.com/outeredge/SwaggerModule",
     "keywords": [
         "api",
         "rest",
