@@ -22,12 +22,12 @@ namespace SwaggerModule;
 
 use RuntimeException;
 use SwaggerModule\Options\ModuleOptions as SwaggerModuleOptions;
-use Swagger\StaticAnalyser as SwaggerStaticAnalyser;
-use Swagger\Analysis as SwaggerAnalysis;
-use Swagger\Util as SwaggerUtil;
-use Zend\Console\Adapter\AdapterInterface;
-use Zend\ModuleManager\Feature\ConfigProviderInterface;
-use Zend\ModuleManager\Feature\ServiceProviderInterface;
+use OpenApi\StaticAnalyser as OpenApiStaticAnalyser;
+use OpenApi\Analysis as OpenApiAnalysis;
+use OpenApi\Util as OpenApiUtil;
+use Laminas\Console\Adapter\AdapterInterface;
+use Laminas\ModuleManager\Feature\ConfigProviderInterface;
+use Laminas\ModuleManager\Feature\ServiceProviderInterface;
 
 /**
  * SwaggerModule
@@ -64,17 +64,17 @@ class Module implements ConfigProviderInterface, ServiceProviderInterface
                     return new SwaggerModuleOptions($config);
                 },
 
-                'Swagger\Annotations\Swagger' => function($serviceManager) {
+                'OpenApi\Annotations\OpenApi' => function($serviceManager) {
                     /** @var $options \SwaggerModule\Options\ModuleOptions */
                     $options = $serviceManager->get('SwaggerModule\Options\ModuleOptions');
-                    $analyser = new SwaggerStaticAnalyser();
-                    $analysis = new SwaggerAnalysis();
-                    $processors = SwaggerAnalysis::processors();
+                    $analyser = new OpenApiStaticAnalyser();
+                    $analysis = new OpenApiAnalysis();
+                    $processors = OpenApiAnalysis::processors();
 
                     // Crawl directory and parse all files
                     $paths = $options->getPaths();
                     foreach($paths as $directory) {
-                        $finder = SwaggerUtil::finder($directory);
+                        $finder = OpenApiUtil::finder($directory);
                         foreach ($finder as $file) {
                             $analysis->addAnalysis($analyser->fromFile($file->getPathname()));
                         }
@@ -86,17 +86,20 @@ class Module implements ConfigProviderInterface, ServiceProviderInterface
 
                     // Pass options to analyzer
                     $resourceOptions = $options->getResourceOptions();
-                    if(!empty($resourceOptions['defaultBasePath'])) {
-                        $analysis->swagger->basePath = $resourceOptions['defaultBasePath'];
+                    if(! empty($resourceOptions['servers'])) {
+                        $analysis->openapi->servers = $resourceOptions['servers'];
                     }
-                    if(!empty($resourceOptions['defaultHost'])) {
-                        $analysis->swagger->host = $resourceOptions['defaultHost'];
+                    if(! empty($resourceOptions['defaultBasePath'])) {
+                        $analysis->openapi->servers['basePath'] = $resourceOptions['defaultBasePath'];
                     }
-                    if(!empty($resourceOptions['schemes'])) {
-                        $analysis->swagger->schemes = $resourceOptions['schemes'];
+                    if(! empty($resourceOptions['defaultHost'])) {
+                        $analysis->openapi->servers['host'] = $resourceOptions['defaultHost'];
+                    }
+                    if(! empty($resourceOptions['schemes'])) {
+                        $analysis->openapi->servers['schemes'] = $resourceOptions['schemes'];
                     }
 
-                    return $analysis->swagger;
+                    return $analysis->openapi;
                 },
             )
         );

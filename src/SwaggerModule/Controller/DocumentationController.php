@@ -20,19 +20,19 @@
 
 namespace SwaggerModule\Controller;
 
-use Swagger\Annotations\Swagger;
-use Zend\Mvc\Controller\AbstractActionController;
-use Zend\View\Model\JsonModel;
+use OpenApi\Annotations\OpenApi;
+use Laminas\Mvc\Controller\AbstractActionController;
+use Laminas\View\Model\JsonModel;
 
 /**
  * DocumentationController. It is used to display a documentation in HTML
  */
 class DocumentationController extends AbstractActionController
 {
-    protected $swagger;
+    protected $openApi;
 
-    public function setSwagger(Swagger $swagger) {
-        $this->swagger = $swagger;
+    public function setOpenApi(OpenApi $openApi) {
+        $this->swagger = $openApi;
     }
 
     /**

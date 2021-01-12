@@ -13,9 +13,12 @@ return array(
             'output' => 'array',
             'json_pretty_print' => true, // for outputtype 'json'
             'defaultApiVersion' => null,
-            'defaultBasePath' => null, // e.g. /api
-            'defaultHost' => null, // example.com
-            'schemes' => null, // e.g. ['http', 'https'],
+            'servers' => [
+                [
+                    'url' => 'https://example.com/api/v1', // servers replaces the host, basePath and schemes keywords used in OpenAPI 2.0.
+                    'description' => null, // e.g. "Production server (uses live data)"
+                ],
+            ],
         ),
     )
 );
